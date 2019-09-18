@@ -9,9 +9,9 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include "Syntact.tab.h"
+#include "parser.h"
 
-
+void yyerror(const char *s);
 //VARIBLE
 
 
@@ -20,6 +20,10 @@
 %}
 
 
+%option outfile="scanner.h"
+%option outfile="scanner.cpp"
+%option noyywrap
+%option nounput
 
 
 letra  	 ([a-zñA-ZÑ])+
@@ -85,10 +89,10 @@ INITIAL
 =                                    { return yytext[0]; }
 
 {id}                                 {  strcpy(yylval.TEXT, yytext);  return Id;         }
-[ \t\n]                               ;
+[ \t\r\n]                               ;
 
 
-.                                     { ECHO; yyerror("\n Errror lexico \n");   }
+.                                     { ECHO;    }
 
 
 
@@ -101,6 +105,3 @@ INITIAL
 
 %%
 
-int yywrap(void) {
-    return 1;
-}

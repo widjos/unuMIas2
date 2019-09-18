@@ -11,7 +11,7 @@ extern int yylineno;    //linea actual donde se encuentra el parser (analisis le
 extern int columna;     //columna actual donde se encuentra el parser (analisis lexico) lo maneja BISON
 extern char *yytext;    //lexema actual donde esta el parser (analisis lexico) lo maneja BISON
 int yylex (void);
-  void yyerror (char  *);
+void yyerror (const char  *);
 
 
 %}
@@ -26,8 +26,9 @@ char TEXT2 [256];
 
 
 //error-verbose si se especifica la opcion los errores sintacticos son especificados por BISON
-
-//%error-verbose
+%defines "parser.h"
+%output  "parser.cpp"
+%define parse.error verbose
 %locations
 
 //TERMINALES DE TIPO TEXT, SON STRINGS
@@ -82,24 +83,24 @@ char TEXT2 [256];
 
 %type<TEXT> S      Line ;
 %type<TEXT> MK     RM       F       M  UM  REP  EXE ;
-%type<TEXT> UN_FT;
+%type<TEXT> MAKE   FIT
 %type<TEXT> UBYTE  FOPTION  STR_VAL REP_TYPE   P_OPTION  ;
-%type<TEXT>  DTYPE  TPARTITION ;
+%type<TEXT> DTYPE  TPARTITION ;
 
 
 %start S
 
 %%
 
-S  :   S Line                                                                     {;}
+S:   S Line                                                                       {;}
    |   Line                                                                       {;}
 
   ;
 
 
-Line :  Mkdisk  MK                                                                 { printf("make disk command ");        }
-     |  Rmdisk  RM                                                                 { printf("remove disk command ");      }
-     |  Fdisk   RM                                                                 { printf("administer disk command ");  }
+Line:   Mkdisk  MK                                                                 { printf("Make Comand executed ");        }
+     |  Rmdisk  RM                                                                 { printf("Removed disk  ");      }
+     |  Fdisk   F                                                                  { printf("administer disk command ");  }
      |  Mount   M                                                                  { printf("mount   disk command ");     }
      |  Unmount UM                                                                 { printf("unmount disk command ");     }
      |  Report  REP                                                                { printf("report  disk command ");     }
@@ -108,28 +109,27 @@ Line :  Mkdisk  MK                                                              
      |  error                                                                      {   }
 ;
 
-MK : Size '=' Value_Int     Path '=' P_OPTION                                     {printf(" Size and Path ");  }
-   | Path '=' P_OPTION      Size '=' Value_Int                                    {printf(" Path and Size");   }
-   | Size '=' Value_Int     UN_FT                    Path '=' P_OPTION            {printf(" Size Unit Path");  }
-   | UN_FT                  Size '=' Value_Int       Path '=' P_OPTION            {printf(" Unit Size  Path"); }
-   | Size '=' Value_Int     Path '=' Value_String    UN_FT                        {printf(" Unit Size  Path"); }
-   | Path '=' P_OPTION      UN_FT                    Size '=' Value_Int           {printf(" Size Unit Path");  }
-   | UN_FT                  Path '=' P_OPTION        Size '=' Value_Int           {printf(" Unit Size  Path"); }
-   | Path '=' P_OPTION      Size '=' Value_Int        UN_FT                       {printf(" Unit Size  Path"); }
 
+MK: MK MAKE                                                                        {;}         
+    | MAKE                                                                         {;}
 ;
 
-RM : Path '=' P_OPTION                                                            {printf(" Path ");}
 
-F :  F  Size    '=' Value_Int                                                     {;}
-   | F  Unit    '=' UBYTE                                                         {;}
-   | F  Path    '=' P_OPTION                                                      {;}
-   | F  Type    '=' TPARTITION                                                    {;}
-   | F  Fit     '=' FOPTION                                                       {;}
-   | F  Delete  '=' DTYPE                                                         {;}
-   | F  Name    '=' Id                                                            {;}
-   | F  Add     '=' Value_Int                                                     {;}  
-   |    Size    '=' Value_Int                                                     {;}  
+MAKE: Size '=' Value_Int                                     {   }
+    | Path '=' P_OPTION                                      {   }
+    | Unit '=' UBYTE   
+    | Fit  '=' FOPTION 
+;
+
+RM: Path '=' P_OPTION                                           {printf(" Path ");}
+;
+
+F: F FIT                                                        {;}        
+  | FIT                                                         {;}
+  
+;
+
+FIT:    Size    '=' Value_Int                                                     {;}  
    |    Unit    '=' UBYTE                                                         {;}
    |    Path    '=' P_OPTION                                                      {;}
    |    Type    '=' TPARTITION                                                    {;}
@@ -141,88 +141,84 @@ F :  F  Size    '=' Value_Int                                                   
 
 
 
-;
-
-M :  Path '=' P_OPTION      Name '=' Id                                             { printf(" Path and Name ");} 
-   | Name '=' Id            Path '=' P_OPTION                                       { printf(" Name and Path ");}
+M:  Path '=' P_OPTION    Name '=' Id                                             { printf(" Path and Name ");} 
+   | Name '=' Id         Path '=' P_OPTION                                       { printf(" Name and Path ");}
    | error
 ;
 
-UM : Identify '=' Id                                                                { printf(" Identify ");     }
+UM: Identify '=' Id                                                                { printf(" Identify ");     }
     | error 
 ;
 
-REP : Identify   '=' Id  Path '=' P_OPTION  Name '=' REP_TYPE                       { printf(" Name , Path , Id ");     } 
+REP: Identify   '=' Id  Path '=' P_OPTION  Name '=' REP_TYPE                       { printf(" Name , Path , Id ");     } 
     | error       
 ;
 
 
-EXE : Path    '=' P_OPTION                                                          { printf(" Path ");  }
+EXE: Path    '=' P_OPTION                                                          { printf(" Path ");  }
     | error
 ;
 
 
-UN_FT : Unit '=' UBYTE      Fit '=' FOPTION                                         { printf(" U/F ") ;}
-      | Fit  '=' FOPTION    Unit '=' UBYTE                                          { printf(" F/U ") ;}  
-      | Unit '=' UBYTE                                                              { printf(" U ")   ;}  
-      | Fit  '=' FOPTION                                                            { printf(" F ")   ;}
-; 
 
 
 
-STR_VAL : Value_String                                                               {;}
+STR_VAL: Value_String                                                               {;}
         | Id                                                                         {;}
         | error                                                                      {;}   
         
 ;
 
-UBYTE : Kbytes                                                                       {;}
-      | Mbytes                                                                       {;}
-      | Bytes                                                                        {;}
+UBYTE: Kbytes                                                                 {$=$1;}
+      | Mbytes                                                                {$=$1;}
+      | Bytes                                                                 {$=$1;}
 ;
 
-FOPTION : Bf                                                                         {;}
+FOPTION:  Bf                                                                          {;}
         | Ff                                                                         {;}
         | Wf                                                                         {;}
         | error                                                                      {;} 
 ;
 
 
-REP_TYPE : Mbr                                                                { printf(" Mbr  "); }
+REP_TYPE: Mbr                                                                { printf(" Mbr  "); }
          | Disc                                                               { printf(" Disc "); } 
          | error                                                              {}    
 ;         
 
 
-P_OPTION : Value_String                                                       {}
-         | Url                                                                {}    
+P_OPTION: Value_String                                                        { $=$1; }
+         | Url                                                                { $=$1; }    
  ; 
 
-DTYPE    : Fast                                                               {}
-         | Full                                                               {}
+DTYPE: Fast                                                                   {}
+      | Full                                                                  {}
 
  ;
 
-TPARTITION : Primary                                                          {}
-           | Extended                                                         {}  
-           | Logic                                                            {}
+TPARTITION: Primary                                                           {}
+          | Extended                                                          {}  
+          | Logic                                                             {}
 ;
+
+
 
 %%
 
 
+struct dataValues {
 
-main(void){
-
-printf("Welcome to the diskParter \n");
-   if(yyparse()== 0)
-       printf("hola");
-   return 0;
-
+    int    size;
+    char[] fit;
+    char   unit;
+    char * path;
 
 }
 
-void yyerror( char* mens)
+dataValues auxStruct;
+
+
+void yyerror(const char* mens)
 {
     fprintf(stderr , mens,  "%s\n"  );
 }
