@@ -2,8 +2,8 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-
-
+#include <operation.h>
+#include <string.h>
 
 //int yylex (void);
 
@@ -12,8 +12,7 @@ extern int columna;     //columna actual donde se encuentra el parser (analisis 
 extern char *yytext;    //lexema actual donde esta el parser (analisis lexico) lo maneja BISON
 int yylex (void);
 void yyerror (const char  *);
-
-
+Operation::dataValues aux;
 %}
 
 
@@ -98,7 +97,7 @@ S:   S Line                                                                     
   ;
 
 
-Line:   Mkdisk  MK                                                                 { printf("Make Comand executed ");        }
+Line:   Mkdisk  MK                                                                 { Operation::createDisk(aux);  aux = {};   }
      |  Rmdisk  RM                                                                 { printf("Removed disk  ");      }
      |  Fdisk   F                                                                  { printf("administer disk command ");  }
      |  Mount   M                                                                  { printf("mount   disk command ");     }
@@ -106,7 +105,7 @@ Line:   Mkdisk  MK                                                              
      |  Report  REP                                                                { printf("report  disk command ");     }
      |  Execute RM                                                                 { printf("execute disk command ");     }                    
      |  exit_command                                                               { printf("Saliendo del gestor de discos \n");   exit(EXIT_SUCCESS);                  }
-     |  error                                                                      {   }
+
 ;
 
 
@@ -115,10 +114,10 @@ MK: MK MAKE                                                                     
 ;
 
 
-MAKE: Size '=' Value_Int                                     {   }
-    | Path '=' P_OPTION                                      {   }
-    | Unit '=' UBYTE   
-    | Fit  '=' FOPTION 
+MAKE: Size '=' Value_Int                                     { aux.size = atoi($3) ;   }
+    | Path '=' P_OPTION                                      { strcpy(aux.path ,$3);  }
+    | Unit '=' UBYTE                                         { strcpy(aux.unit ,$3);  }
+    | Fit  '=' FOPTION                                       { strcpy(aux.fit ,$3);  }
 ;
 
 RM: Path '=' P_OPTION                                           {printf(" Path ");}
@@ -163,20 +162,21 @@ EXE: Path    '=' P_OPTION                                                       
 
 
 
-STR_VAL: Value_String                                                               {;}
-        | Id                                                                         {;}
+STR_VAL: Value_String                                                               {strcpy($$,$1);}
+        | Id                                                                         {strcpy($$,$1);}
         | error                                                                      {;}   
         
 ;
 
-UBYTE: Kbytes                                                                 {$=$1;}
-      | Mbytes                                                                {$=$1;}
-      | Bytes                                                                 {$=$1;}
+UBYTE: Kbytes                                                                 {strcpy($$,$1);}
+      | Mbytes                                                                {strcpy($$,$1);  }
+      | Bytes                                                                 {strcpy($$,$1);}
+    |  error                                                                       
 ;
 
-FOPTION:  Bf                                                                          {;}
-        | Ff                                                                         {;}
-        | Wf                                                                         {;}
+FOPTION:  Bf                                                                         {strcpy($$,$1);}
+        | Ff                                                                         {strcpy($$,$1);}
+        | Wf                                                                         {strcpy($$,$1);}
         | error                                                                      {;} 
 ;
 
@@ -187,8 +187,8 @@ REP_TYPE: Mbr                                                                { p
 ;         
 
 
-P_OPTION: Value_String                                                        { $=$1; }
-         | Url                                                                { $=$1; }    
+P_OPTION: Value_String                                                        { Operation::cleanStr($1); strcpy($$,$1);}
+         | Url                                                                {  strcpy($$,$1);}
  ; 
 
 DTYPE: Fast                                                                   {}
@@ -205,17 +205,6 @@ TPARTITION: Primary                                                           {}
 
 %%
 
-
-struct dataValues {
-
-    int    size;
-    char[] fit;
-    char   unit;
-    char * path;
-
-}
-
-dataValues auxStruct;
 
 
 void yyerror(const char* mens)

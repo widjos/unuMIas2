@@ -1,9 +1,10 @@
 #include <iostream>
 #include <Analisis/parser.h>
 #include <Analisis/scanner.h>
+#include <operation.h>
 
 using namespace std;
-void analisis();
+
 
 extern int yyparse();
 
@@ -11,6 +12,9 @@ extern int yyparse();
 
 int main(){
 
+   // Operation::dataValues aux;
+   // aux.size = 1545;
+   // cout << aux.size << endl;
    while(true){
        string str;
        getline(cin,str);
