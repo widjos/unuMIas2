@@ -13,6 +13,9 @@ extern char *yytext;    //lexema actual donde esta el parser (analisis lexico) l
 int yylex (void);
 void yyerror (const char  *);
 Operation::dataValues aux;
+
+
+
 %}
 
 
@@ -162,8 +165,8 @@ EXE: Path    '=' P_OPTION                                                       
 
 
 
-STR_VAL: Value_String                                                               {strcpy($$,$1);}
-        | Id                                                                         {strcpy($$,$1);}
+STR_VAL: Value_String                                                               {Operation::cleanStr($1);    strcpy($$,$1);}
+        | Id                                                                        {strcpy($$,$1);}
         | error                                                                      {;}   
         
 ;
@@ -181,13 +184,13 @@ FOPTION:  Bf                                                                    
 ;
 
 
-REP_TYPE: Mbr                                                                { printf(" Mbr  "); }
+REP_TYPE: Mbr                                                                 { printf(" Mbr  "); }
          | Disc                                                               { printf(" Disc "); } 
          | error                                                              {}    
 ;         
 
 
-P_OPTION: Value_String                                                        { Operation::cleanStr($1); strcpy($$,$1);}
+P_OPTION: Value_String                                                        {  Operation::cleanStr($1);    strcpy($$,$1);             }
          | Url                                                                {  strcpy($$,$1);}
  ; 
 

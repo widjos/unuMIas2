@@ -82,7 +82,10 @@ int yylex (void);
 void yyerror (const char  *);
 Operation::dataValues aux;
 
-#line 86 "parser.cpp" /* yacc.c:337  */
+
+
+
+#line 89 "parser.cpp" /* yacc.c:337  */
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
 #   if 201103L <= __cplusplus
@@ -165,14 +168,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 19 "Syntact.y" /* yacc.c:352  */
+#line 22 "Syntact.y" /* yacc.c:352  */
 
 //se especifican los tipo de valores para los no terminales y lo terminales
 char TEXT [256];
 char TEXT2 [256];
 //class NodoAST *nodito;
 
-#line 176 "parser.cpp" /* yacc.c:352  */
+#line 179 "parser.cpp" /* yacc.c:352  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -495,12 +498,12 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    94,    94,    95,   100,   101,   102,   103,   104,   105,
-     106,   107,   112,   113,   117,   118,   119,   120,   123,   126,
-     127,   131,   132,   133,   134,   135,   136,   137,   138,   143,
-     144,   145,   148,   149,   152,   153,   171,   172,   173,   174,
-     177,   178,   179,   180,   184,   185,   186,   190,   191,   194,
-     195,   199,   200,   201
+       0,    97,    97,    98,   103,   104,   105,   106,   107,   108,
+     109,   110,   115,   116,   120,   121,   122,   123,   126,   129,
+     130,   134,   135,   136,   137,   138,   139,   140,   141,   146,
+     147,   148,   151,   152,   155,   156,   174,   175,   176,   177,
+     180,   181,   182,   183,   187,   188,   189,   193,   194,   197,
+     198,   202,   203,   204
 };
 #endif
 
@@ -1441,295 +1444,295 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 94 "Syntact.y" /* yacc.c:1652  */
+#line 97 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1447 "parser.cpp" /* yacc.c:1652  */
+#line 1450 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 3:
-#line 95 "Syntact.y" /* yacc.c:1652  */
+#line 98 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1453 "parser.cpp" /* yacc.c:1652  */
+#line 1456 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 4:
-#line 100 "Syntact.y" /* yacc.c:1652  */
+#line 103 "Syntact.y" /* yacc.c:1652  */
     { Operation::createDisk(aux);  aux = {};   }
-#line 1459 "parser.cpp" /* yacc.c:1652  */
+#line 1462 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 5:
-#line 101 "Syntact.y" /* yacc.c:1652  */
+#line 104 "Syntact.y" /* yacc.c:1652  */
     { printf("Removed disk  ");      }
-#line 1465 "parser.cpp" /* yacc.c:1652  */
+#line 1468 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 6:
-#line 102 "Syntact.y" /* yacc.c:1652  */
+#line 105 "Syntact.y" /* yacc.c:1652  */
     { printf("administer disk command ");  }
-#line 1471 "parser.cpp" /* yacc.c:1652  */
+#line 1474 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 7:
-#line 103 "Syntact.y" /* yacc.c:1652  */
+#line 106 "Syntact.y" /* yacc.c:1652  */
     { printf("mount   disk command ");     }
-#line 1477 "parser.cpp" /* yacc.c:1652  */
+#line 1480 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 8:
-#line 104 "Syntact.y" /* yacc.c:1652  */
+#line 107 "Syntact.y" /* yacc.c:1652  */
     { printf("unmount disk command ");     }
-#line 1483 "parser.cpp" /* yacc.c:1652  */
+#line 1486 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 9:
-#line 105 "Syntact.y" /* yacc.c:1652  */
+#line 108 "Syntact.y" /* yacc.c:1652  */
     { printf("report  disk command ");     }
-#line 1489 "parser.cpp" /* yacc.c:1652  */
+#line 1492 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 10:
-#line 106 "Syntact.y" /* yacc.c:1652  */
+#line 109 "Syntact.y" /* yacc.c:1652  */
     { printf("execute disk command ");     }
-#line 1495 "parser.cpp" /* yacc.c:1652  */
+#line 1498 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 11:
-#line 107 "Syntact.y" /* yacc.c:1652  */
+#line 110 "Syntact.y" /* yacc.c:1652  */
     { printf("Saliendo del gestor de discos \n");   exit(EXIT_SUCCESS);                  }
-#line 1501 "parser.cpp" /* yacc.c:1652  */
+#line 1504 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 12:
-#line 112 "Syntact.y" /* yacc.c:1652  */
+#line 115 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1507 "parser.cpp" /* yacc.c:1652  */
+#line 1510 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 13:
-#line 113 "Syntact.y" /* yacc.c:1652  */
+#line 116 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1513 "parser.cpp" /* yacc.c:1652  */
+#line 1516 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 14:
-#line 117 "Syntact.y" /* yacc.c:1652  */
+#line 120 "Syntact.y" /* yacc.c:1652  */
     { aux.size = atoi((yyvsp[0].TEXT)) ;   }
-#line 1519 "parser.cpp" /* yacc.c:1652  */
+#line 1522 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 15:
-#line 118 "Syntact.y" /* yacc.c:1652  */
+#line 121 "Syntact.y" /* yacc.c:1652  */
     { strcpy(aux.path ,(yyvsp[0].TEXT));  }
-#line 1525 "parser.cpp" /* yacc.c:1652  */
+#line 1528 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 16:
-#line 119 "Syntact.y" /* yacc.c:1652  */
+#line 122 "Syntact.y" /* yacc.c:1652  */
     { strcpy(aux.unit ,(yyvsp[0].TEXT));  }
-#line 1531 "parser.cpp" /* yacc.c:1652  */
+#line 1534 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 17:
-#line 120 "Syntact.y" /* yacc.c:1652  */
+#line 123 "Syntact.y" /* yacc.c:1652  */
     { strcpy(aux.fit ,(yyvsp[0].TEXT));  }
-#line 1537 "parser.cpp" /* yacc.c:1652  */
+#line 1540 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 18:
-#line 123 "Syntact.y" /* yacc.c:1652  */
+#line 126 "Syntact.y" /* yacc.c:1652  */
     {printf(" Path ");}
-#line 1543 "parser.cpp" /* yacc.c:1652  */
+#line 1546 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 19:
-#line 126 "Syntact.y" /* yacc.c:1652  */
+#line 129 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1549 "parser.cpp" /* yacc.c:1652  */
+#line 1552 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 20:
-#line 127 "Syntact.y" /* yacc.c:1652  */
+#line 130 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1555 "parser.cpp" /* yacc.c:1652  */
+#line 1558 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 21:
-#line 131 "Syntact.y" /* yacc.c:1652  */
+#line 134 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1561 "parser.cpp" /* yacc.c:1652  */
+#line 1564 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 22:
-#line 132 "Syntact.y" /* yacc.c:1652  */
+#line 135 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1567 "parser.cpp" /* yacc.c:1652  */
+#line 1570 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 23:
-#line 133 "Syntact.y" /* yacc.c:1652  */
+#line 136 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1573 "parser.cpp" /* yacc.c:1652  */
+#line 1576 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 24:
-#line 134 "Syntact.y" /* yacc.c:1652  */
+#line 137 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1579 "parser.cpp" /* yacc.c:1652  */
+#line 1582 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 25:
-#line 135 "Syntact.y" /* yacc.c:1652  */
+#line 138 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1585 "parser.cpp" /* yacc.c:1652  */
+#line 1588 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 26:
-#line 136 "Syntact.y" /* yacc.c:1652  */
+#line 139 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1591 "parser.cpp" /* yacc.c:1652  */
+#line 1594 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 27:
-#line 137 "Syntact.y" /* yacc.c:1652  */
+#line 140 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1597 "parser.cpp" /* yacc.c:1652  */
+#line 1600 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 28:
-#line 138 "Syntact.y" /* yacc.c:1652  */
+#line 141 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1603 "parser.cpp" /* yacc.c:1652  */
+#line 1606 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 29:
-#line 143 "Syntact.y" /* yacc.c:1652  */
+#line 146 "Syntact.y" /* yacc.c:1652  */
     { printf(" Path and Name ");}
-#line 1609 "parser.cpp" /* yacc.c:1652  */
+#line 1612 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 30:
-#line 144 "Syntact.y" /* yacc.c:1652  */
+#line 147 "Syntact.y" /* yacc.c:1652  */
     { printf(" Name and Path ");}
-#line 1615 "parser.cpp" /* yacc.c:1652  */
+#line 1618 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 32:
-#line 148 "Syntact.y" /* yacc.c:1652  */
+#line 151 "Syntact.y" /* yacc.c:1652  */
     { printf(" Identify ");     }
-#line 1621 "parser.cpp" /* yacc.c:1652  */
+#line 1624 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 34:
-#line 152 "Syntact.y" /* yacc.c:1652  */
+#line 155 "Syntact.y" /* yacc.c:1652  */
     { printf(" Name , Path , Id ");     }
-#line 1627 "parser.cpp" /* yacc.c:1652  */
+#line 1630 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 36:
-#line 171 "Syntact.y" /* yacc.c:1652  */
+#line 174 "Syntact.y" /* yacc.c:1652  */
     {strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1633 "parser.cpp" /* yacc.c:1652  */
+#line 1636 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 37:
-#line 172 "Syntact.y" /* yacc.c:1652  */
+#line 175 "Syntact.y" /* yacc.c:1652  */
     {strcpy((yyval.TEXT),(yyvsp[0].TEXT));  }
-#line 1639 "parser.cpp" /* yacc.c:1652  */
+#line 1642 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 38:
-#line 173 "Syntact.y" /* yacc.c:1652  */
+#line 176 "Syntact.y" /* yacc.c:1652  */
     {strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1645 "parser.cpp" /* yacc.c:1652  */
+#line 1648 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 40:
-#line 177 "Syntact.y" /* yacc.c:1652  */
+#line 180 "Syntact.y" /* yacc.c:1652  */
     {strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1651 "parser.cpp" /* yacc.c:1652  */
+#line 1654 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 41:
-#line 178 "Syntact.y" /* yacc.c:1652  */
+#line 181 "Syntact.y" /* yacc.c:1652  */
     {strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1657 "parser.cpp" /* yacc.c:1652  */
+#line 1660 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 42:
-#line 179 "Syntact.y" /* yacc.c:1652  */
+#line 182 "Syntact.y" /* yacc.c:1652  */
     {strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1663 "parser.cpp" /* yacc.c:1652  */
+#line 1666 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 43:
-#line 180 "Syntact.y" /* yacc.c:1652  */
+#line 183 "Syntact.y" /* yacc.c:1652  */
     {;}
-#line 1669 "parser.cpp" /* yacc.c:1652  */
+#line 1672 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 44:
-#line 184 "Syntact.y" /* yacc.c:1652  */
+#line 187 "Syntact.y" /* yacc.c:1652  */
     { printf(" Mbr  "); }
-#line 1675 "parser.cpp" /* yacc.c:1652  */
+#line 1678 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 45:
-#line 185 "Syntact.y" /* yacc.c:1652  */
+#line 188 "Syntact.y" /* yacc.c:1652  */
     { printf(" Disc "); }
-#line 1681 "parser.cpp" /* yacc.c:1652  */
+#line 1684 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 46:
-#line 186 "Syntact.y" /* yacc.c:1652  */
+#line 189 "Syntact.y" /* yacc.c:1652  */
     {}
-#line 1687 "parser.cpp" /* yacc.c:1652  */
+#line 1690 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 47:
-#line 190 "Syntact.y" /* yacc.c:1652  */
-    { Operation::cleanStr((yyvsp[0].TEXT)); strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1693 "parser.cpp" /* yacc.c:1652  */
+#line 193 "Syntact.y" /* yacc.c:1652  */
+    {  Operation::cleanStr((yyvsp[0].TEXT));    strcpy((yyval.TEXT),(yyvsp[0].TEXT));             }
+#line 1696 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 48:
-#line 191 "Syntact.y" /* yacc.c:1652  */
+#line 194 "Syntact.y" /* yacc.c:1652  */
     {  strcpy((yyval.TEXT),(yyvsp[0].TEXT));}
-#line 1699 "parser.cpp" /* yacc.c:1652  */
+#line 1702 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 49:
-#line 194 "Syntact.y" /* yacc.c:1652  */
+#line 197 "Syntact.y" /* yacc.c:1652  */
     {}
-#line 1705 "parser.cpp" /* yacc.c:1652  */
+#line 1708 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 50:
-#line 195 "Syntact.y" /* yacc.c:1652  */
+#line 198 "Syntact.y" /* yacc.c:1652  */
     {}
-#line 1711 "parser.cpp" /* yacc.c:1652  */
+#line 1714 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 51:
-#line 199 "Syntact.y" /* yacc.c:1652  */
+#line 202 "Syntact.y" /* yacc.c:1652  */
     {}
-#line 1717 "parser.cpp" /* yacc.c:1652  */
+#line 1720 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 52:
-#line 200 "Syntact.y" /* yacc.c:1652  */
+#line 203 "Syntact.y" /* yacc.c:1652  */
     {}
-#line 1723 "parser.cpp" /* yacc.c:1652  */
+#line 1726 "parser.cpp" /* yacc.c:1652  */
     break;
 
   case 53:
-#line 201 "Syntact.y" /* yacc.c:1652  */
+#line 204 "Syntact.y" /* yacc.c:1652  */
     {}
-#line 1729 "parser.cpp" /* yacc.c:1652  */
+#line 1732 "parser.cpp" /* yacc.c:1652  */
     break;
 
 
-#line 1733 "parser.cpp" /* yacc.c:1652  */
+#line 1736 "parser.cpp" /* yacc.c:1652  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1966,7 +1969,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 206 "Syntact.y" /* yacc.c:1918  */
+#line 209 "Syntact.y" /* yacc.c:1918  */
 
 
 

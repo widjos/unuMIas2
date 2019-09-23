@@ -94,7 +94,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 19 "Syntact.y" /* yacc.c:1921  */
+#line 22 "Syntact.y" /* yacc.c:1921  */
 
 //se especifican los tipo de valores para los no terminales y lo terminales
 char TEXT [256];
