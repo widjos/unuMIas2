@@ -386,6 +386,7 @@ void Operation::printPartitionRep(int direccion, char * dir)
         return;
     }
      else
+        //One coment
     {
         fseek(fp, direccion, SEEK_SET);
          fread(&partToRead , sizeof (struct partition), 1 , fp);
