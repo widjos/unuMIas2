@@ -12,9 +12,7 @@ extern int yyparse();
 
 int main(){
 
-   // Operation::dataValues aux;
-   // aux.size = 1545;
-   // cout << aux.size << endl;
+
    while(true){
        string str;
        getline(cin,str);

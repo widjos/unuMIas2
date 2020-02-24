@@ -1,0 +1,1117 @@
+Gramática
+
+    0 $accept: INICIO $end
+
+    1 INICIO: A
+
+    2 A: A B
+    3  | B
+
+    4 B: CREARDISCO
+    5  | ELIMINARDISCO
+    6  | CREARPARTICION
+    7  | MONTAR
+    8  | DESMONTAR
+    9  | REPORTE
+   10  | SCRIPT
+
+   11 CREARDISCO: Rmkdisk PCD
+
+   12 PCD: PCD PCD2
+   13    | PCD2
+
+   14 PCD2: Rsize Rigual numero
+   15     | Rpath Rigual PATH
+   16     | Rfit Rigual FIT
+   17     | Runit Rigual UNIT
+
+   18 ELIMINARDISCO: Rrmdisk Rpath Rigual PATH
+
+   19 CREARPARTICION: Rfdisk PCP
+
+   20 PCP: PCP PCP2
+   21    | PCP2
+
+   22 PCP2: Rsize Rigual NUMR
+   23     | Rpath Rigual PATH
+   24     | Rfit Rigual FIT
+   25     | Runit Rigual UNIT
+   26     | Rtype Rigual TYPE
+   27     | Rdelete Rigual DELETE
+   28     | Rname Rigual identificador
+   29     | Radd Rigual NUMR
+
+   30 MONTAR: Rmount PM
+
+   31 PM: Rpath Rigual PATH Rname Rigual identificador
+   32   | Rname Rigual identificador Rpath Rigual PATH
+
+   33 DESMONTAR: Rumount Rid Rigual identificador
+
+   34 REPORTE: Rrep PREP
+
+   35 PREP: PREP PREP2
+   36     | PREP2
+
+   37 PREP2: Rname Rigual NR
+   38      | Rpath Rigual PATH
+   39      | Rid Rigual identificador
+
+   40 SCRIPT: Rexec Rpath Rigual PATH
+
+   41 PATH: cadena
+   42     | rut
+
+   43 FIT: Rbf
+   44    | Rff
+   45    | Rwf
+
+   46 UNIT: Runitk
+   47     | Runitm
+   48     | Runitb
+
+   49 TYPE: Rtypep
+   50     | Rtypee
+   51     | Rtypel
+
+   52 DELETE: Rdeletefast
+   53       | Rdeletefull
+
+   54 NR: Rmbr
+   55   | Rdisk
+
+   56 NUMR: numero
+   57     | Rmenos numero
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+Rmkdisk <TEXT> (258) 11
+Rsize <TEXT> (259) 14 22
+Rfit <TEXT> (260) 16 24
+Rbf <TEXT> (261) 43
+Rff <TEXT> (262) 44
+Rwf <TEXT> (263) 45
+Runit <TEXT> (264) 17 25
+Runitk <TEXT> (265) 46
+Runitm <TEXT> (266) 47
+Runitb <TEXT> (267) 48
+Rpath <TEXT> (268) 15 18 23 31 32 38 40
+Rigual <TEXT> (269) 14 15 16 17 18 22 23 24 25 26 27 28 29 31 32 33
+    37 38 39 40
+Rrmdisk <TEXT> (270) 18
+Rfdisk <TEXT> (271) 19
+Rtype <TEXT> (272) 26
+Rdelete <TEXT> (273) 27
+Rtypep <TEXT> (274) 49
+Rtypee <TEXT> (275) 50
+Rtypel <TEXT> (276) 51
+Rdeletefast <TEXT> (277) 52
+Rdeletefull <TEXT> (278) 53
+Rname <TEXT> (279) 28 31 32 37
+Radd <TEXT> (280) 29
+Rmount <TEXT> (281) 30
+Rumount <TEXT> (282) 33
+Rmenos <TEXT> (283) 57
+Rid <TEXT> (284) 33 39
+Rrep <TEXT> (285) 34
+Rexec <TEXT> (286) 40
+Rmbr <TEXT> (287) 54
+Rdisk <TEXT> (288) 55
+rut <TEXT> (289) 42
+identificador <TEXT> (290) 28 31 32 33 39
+numero <TEXT> (291) 14 56 57
+cadena <TEXT> (292) 41
+
+
+No terminales con las reglas donde aparecen
+
+$accept (38)
+    en la izquierda: 0
+INICIO <TEXT> (39)
+    en la izquierda: 1, en la derecha: 0
+A <TEXT> (40)
+    en la izquierda: 2 3, en la derecha: 1 2
+B <TEXT> (41)
+    en la izquierda: 4 5 6 7 8 9 10, en la derecha: 2 3
+CREARDISCO <TEXT> (42)
+    en la izquierda: 11, en la derecha: 4
+PCD <TEXT> (43)
+    en la izquierda: 12 13, en la derecha: 11 12
+PCD2 <TEXT> (44)
+    en la izquierda: 14 15 16 17, en la derecha: 12 13
+ELIMINARDISCO <TEXT> (45)
+    en la izquierda: 18, en la derecha: 5
+CREARPARTICION <TEXT> (46)
+    en la izquierda: 19, en la derecha: 6
+PCP <TEXT> (47)
+    en la izquierda: 20 21, en la derecha: 19 20
+PCP2 <TEXT> (48)
+    en la izquierda: 22 23 24 25 26 27 28 29, en la derecha: 20 21
+MONTAR <TEXT> (49)
+    en la izquierda: 30, en la derecha: 7
+PM <TEXT> (50)
+    en la izquierda: 31 32, en la derecha: 30
+DESMONTAR <TEXT> (51)
+    en la izquierda: 33, en la derecha: 8
+REPORTE <TEXT> (52)
+    en la izquierda: 34, en la derecha: 9
+PREP <TEXT> (53)
+    en la izquierda: 35 36, en la derecha: 34 35
+PREP2 <TEXT> (54)
+    en la izquierda: 37 38 39, en la derecha: 35 36
+SCRIPT <TEXT> (55)
+    en la izquierda: 40, en la derecha: 10
+PATH <TEXT> (56)
+    en la izquierda: 41 42, en la derecha: 15 18 23 31 32 38 40
+FIT <TEXT> (57)
+    en la izquierda: 43 44 45, en la derecha: 16 24
+UNIT <TEXT> (58)
+    en la izquierda: 46 47 48, en la derecha: 17 25
+TYPE <TEXT> (59)
+    en la izquierda: 49 50 51, en la derecha: 26
+DELETE <TEXT> (60)
+    en la izquierda: 52 53, en la derecha: 27
+NR <TEXT> (61)
+    en la izquierda: 54 55, en la derecha: 37
+NUMR <TEXT> (62)
+    en la izquierda: 56 57, en la derecha: 22 29
+
+
+Estado 0
+
+    0 $accept: . INICIO $end
+
+    Rmkdisk  desplazar e ir al estado 1
+    Rrmdisk  desplazar e ir al estado 2
+    Rfdisk   desplazar e ir al estado 3
+    Rmount   desplazar e ir al estado 4
+    Rumount  desplazar e ir al estado 5
+    Rrep     desplazar e ir al estado 6
+    Rexec    desplazar e ir al estado 7
+
+    INICIO          ir al estado 8
+    A               ir al estado 9
+    B               ir al estado 10
+    CREARDISCO      ir al estado 11
+    ELIMINARDISCO   ir al estado 12
+    CREARPARTICION  ir al estado 13
+    MONTAR          ir al estado 14
+    DESMONTAR       ir al estado 15
+    REPORTE         ir al estado 16
+    SCRIPT          ir al estado 17
+
+
+Estado 1
+
+   11 CREARDISCO: Rmkdisk . PCD
+
+    Rsize  desplazar e ir al estado 18
+    Rfit   desplazar e ir al estado 19
+    Runit  desplazar e ir al estado 20
+    Rpath  desplazar e ir al estado 21
+
+    PCD   ir al estado 22
+    PCD2  ir al estado 23
+
+
+Estado 2
+
+   18 ELIMINARDISCO: Rrmdisk . Rpath Rigual PATH
+
+    Rpath  desplazar e ir al estado 24
+
+
+Estado 3
+
+   19 CREARPARTICION: Rfdisk . PCP
+
+    Rsize    desplazar e ir al estado 25
+    Rfit     desplazar e ir al estado 26
+    Runit    desplazar e ir al estado 27
+    Rpath    desplazar e ir al estado 28
+    Rtype    desplazar e ir al estado 29
+    Rdelete  desplazar e ir al estado 30
+    Rname    desplazar e ir al estado 31
+    Radd     desplazar e ir al estado 32
+
+    PCP   ir al estado 33
+    PCP2  ir al estado 34
+
+
+Estado 4
+
+   30 MONTAR: Rmount . PM
+
+    Rpath  desplazar e ir al estado 35
+    Rname  desplazar e ir al estado 36
+
+    PM  ir al estado 37
+
+
+Estado 5
+
+   33 DESMONTAR: Rumount . Rid Rigual identificador
+
+    Rid  desplazar e ir al estado 38
+
+
+Estado 6
+
+   34 REPORTE: Rrep . PREP
+
+    Rpath  desplazar e ir al estado 39
+    Rname  desplazar e ir al estado 40
+    Rid    desplazar e ir al estado 41
+
+    PREP   ir al estado 42
+    PREP2  ir al estado 43
+
+
+Estado 7
+
+   40 SCRIPT: Rexec . Rpath Rigual PATH
+
+    Rpath  desplazar e ir al estado 44
+
+
+Estado 8
+
+    0 $accept: INICIO . $end
+
+    $end  desplazar e ir al estado 45
+
+
+Estado 9
+
+    1 INICIO: A .
+    2 A: A . B
+
+    Rmkdisk  desplazar e ir al estado 1
+    Rrmdisk  desplazar e ir al estado 2
+    Rfdisk   desplazar e ir al estado 3
+    Rmount   desplazar e ir al estado 4
+    Rumount  desplazar e ir al estado 5
+    Rrep     desplazar e ir al estado 6
+    Rexec    desplazar e ir al estado 7
+
+    $default  reduce usando la regla 1 (INICIO)
+
+    B               ir al estado 46
+    CREARDISCO      ir al estado 11
+    ELIMINARDISCO   ir al estado 12
+    CREARPARTICION  ir al estado 13
+    MONTAR          ir al estado 14
+    DESMONTAR       ir al estado 15
+    REPORTE         ir al estado 16
+    SCRIPT          ir al estado 17
+
+
+Estado 10
+
+    3 A: B .
+
+    $default  reduce usando la regla 3 (A)
+
+
+Estado 11
+
+    4 B: CREARDISCO .
+
+    $default  reduce usando la regla 4 (B)
+
+
+Estado 12
+
+    5 B: ELIMINARDISCO .
+
+    $default  reduce usando la regla 5 (B)
+
+
+Estado 13
+
+    6 B: CREARPARTICION .
+
+    $default  reduce usando la regla 6 (B)
+
+
+Estado 14
+
+    7 B: MONTAR .
+
+    $default  reduce usando la regla 7 (B)
+
+
+Estado 15
+
+    8 B: DESMONTAR .
+
+    $default  reduce usando la regla 8 (B)
+
+
+Estado 16
+
+    9 B: REPORTE .
+
+    $default  reduce usando la regla 9 (B)
+
+
+Estado 17
+
+   10 B: SCRIPT .
+
+    $default  reduce usando la regla 10 (B)
+
+
+Estado 18
+
+   14 PCD2: Rsize . Rigual numero
+
+    Rigual  desplazar e ir al estado 47
+
+
+Estado 19
+
+   16 PCD2: Rfit . Rigual FIT
+
+    Rigual  desplazar e ir al estado 48
+
+
+Estado 20
+
+   17 PCD2: Runit . Rigual UNIT
+
+    Rigual  desplazar e ir al estado 49
+
+
+Estado 21
+
+   15 PCD2: Rpath . Rigual PATH
+
+    Rigual  desplazar e ir al estado 50
+
+
+Estado 22
+
+   11 CREARDISCO: Rmkdisk PCD .
+   12 PCD: PCD . PCD2
+
+    Rsize  desplazar e ir al estado 18
+    Rfit   desplazar e ir al estado 19
+    Runit  desplazar e ir al estado 20
+    Rpath  desplazar e ir al estado 21
+
+    $default  reduce usando la regla 11 (CREARDISCO)
+
+    PCD2  ir al estado 51
+
+
+Estado 23
+
+   13 PCD: PCD2 .
+
+    $default  reduce usando la regla 13 (PCD)
+
+
+Estado 24
+
+   18 ELIMINARDISCO: Rrmdisk Rpath . Rigual PATH
+
+    Rigual  desplazar e ir al estado 52
+
+
+Estado 25
+
+   22 PCP2: Rsize . Rigual NUMR
+
+    Rigual  desplazar e ir al estado 53
+
+
+Estado 26
+
+   24 PCP2: Rfit . Rigual FIT
+
+    Rigual  desplazar e ir al estado 54
+
+
+Estado 27
+
+   25 PCP2: Runit . Rigual UNIT
+
+    Rigual  desplazar e ir al estado 55
+
+
+Estado 28
+
+   23 PCP2: Rpath . Rigual PATH
+
+    Rigual  desplazar e ir al estado 56
+
+
+Estado 29
+
+   26 PCP2: Rtype . Rigual TYPE
+
+    Rigual  desplazar e ir al estado 57
+
+
+Estado 30
+
+   27 PCP2: Rdelete . Rigual DELETE
+
+    Rigual  desplazar e ir al estado 58
+
+
+Estado 31
+
+   28 PCP2: Rname . Rigual identificador
+
+    Rigual  desplazar e ir al estado 59
+
+
+Estado 32
+
+   29 PCP2: Radd . Rigual NUMR
+
+    Rigual  desplazar e ir al estado 60
+
+
+Estado 33
+
+   19 CREARPARTICION: Rfdisk PCP .
+   20 PCP: PCP . PCP2
+
+    Rsize    desplazar e ir al estado 25
+    Rfit     desplazar e ir al estado 26
+    Runit    desplazar e ir al estado 27
+    Rpath    desplazar e ir al estado 28
+    Rtype    desplazar e ir al estado 29
+    Rdelete  desplazar e ir al estado 30
+    Rname    desplazar e ir al estado 31
+    Radd     desplazar e ir al estado 32
+
+    $default  reduce usando la regla 19 (CREARPARTICION)
+
+    PCP2  ir al estado 61
+
+
+Estado 34
+
+   21 PCP: PCP2 .
+
+    $default  reduce usando la regla 21 (PCP)
+
+
+Estado 35
+
+   31 PM: Rpath . Rigual PATH Rname Rigual identificador
+
+    Rigual  desplazar e ir al estado 62
+
+
+Estado 36
+
+   32 PM: Rname . Rigual identificador Rpath Rigual PATH
+
+    Rigual  desplazar e ir al estado 63
+
+
+Estado 37
+
+   30 MONTAR: Rmount PM .
+
+    $default  reduce usando la regla 30 (MONTAR)
+
+
+Estado 38
+
+   33 DESMONTAR: Rumount Rid . Rigual identificador
+
+    Rigual  desplazar e ir al estado 64
+
+
+Estado 39
+
+   38 PREP2: Rpath . Rigual PATH
+
+    Rigual  desplazar e ir al estado 65
+
+
+Estado 40
+
+   37 PREP2: Rname . Rigual NR
+
+    Rigual  desplazar e ir al estado 66
+
+
+Estado 41
+
+   39 PREP2: Rid . Rigual identificador
+
+    Rigual  desplazar e ir al estado 67
+
+
+Estado 42
+
+   34 REPORTE: Rrep PREP .
+   35 PREP: PREP . PREP2
+
+    Rpath  desplazar e ir al estado 39
+    Rname  desplazar e ir al estado 40
+    Rid    desplazar e ir al estado 41
+
+    $default  reduce usando la regla 34 (REPORTE)
+
+    PREP2  ir al estado 68
+
+
+Estado 43
+
+   36 PREP: PREP2 .
+
+    $default  reduce usando la regla 36 (PREP)
+
+
+Estado 44
+
+   40 SCRIPT: Rexec Rpath . Rigual PATH
+
+    Rigual  desplazar e ir al estado 69
+
+
+Estado 45
+
+    0 $accept: INICIO $end .
+
+    $default  aceptar
+
+
+Estado 46
+
+    2 A: A B .
+
+    $default  reduce usando la regla 2 (A)
+
+
+Estado 47
+
+   14 PCD2: Rsize Rigual . numero
+
+    numero  desplazar e ir al estado 70
+
+
+Estado 48
+
+   16 PCD2: Rfit Rigual . FIT
+
+    Rbf  desplazar e ir al estado 71
+    Rff  desplazar e ir al estado 72
+    Rwf  desplazar e ir al estado 73
+
+    FIT  ir al estado 74
+
+
+Estado 49
+
+   17 PCD2: Runit Rigual . UNIT
+
+    Runitk  desplazar e ir al estado 75
+    Runitm  desplazar e ir al estado 76
+    Runitb  desplazar e ir al estado 77
+
+    UNIT  ir al estado 78
+
+
+Estado 50
+
+   15 PCD2: Rpath Rigual . PATH
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 81
+
+
+Estado 51
+
+   12 PCD: PCD PCD2 .
+
+    $default  reduce usando la regla 12 (PCD)
+
+
+Estado 52
+
+   18 ELIMINARDISCO: Rrmdisk Rpath Rigual . PATH
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 82
+
+
+Estado 53
+
+   22 PCP2: Rsize Rigual . NUMR
+
+    Rmenos  desplazar e ir al estado 83
+    numero  desplazar e ir al estado 84
+
+    NUMR  ir al estado 85
+
+
+Estado 54
+
+   24 PCP2: Rfit Rigual . FIT
+
+    Rbf  desplazar e ir al estado 71
+    Rff  desplazar e ir al estado 72
+    Rwf  desplazar e ir al estado 73
+
+    FIT  ir al estado 86
+
+
+Estado 55
+
+   25 PCP2: Runit Rigual . UNIT
+
+    Runitk  desplazar e ir al estado 75
+    Runitm  desplazar e ir al estado 76
+    Runitb  desplazar e ir al estado 77
+
+    UNIT  ir al estado 87
+
+
+Estado 56
+
+   23 PCP2: Rpath Rigual . PATH
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 88
+
+
+Estado 57
+
+   26 PCP2: Rtype Rigual . TYPE
+
+    Rtypep  desplazar e ir al estado 89
+    Rtypee  desplazar e ir al estado 90
+    Rtypel  desplazar e ir al estado 91
+
+    TYPE  ir al estado 92
+
+
+Estado 58
+
+   27 PCP2: Rdelete Rigual . DELETE
+
+    Rdeletefast  desplazar e ir al estado 93
+    Rdeletefull  desplazar e ir al estado 94
+
+    DELETE  ir al estado 95
+
+
+Estado 59
+
+   28 PCP2: Rname Rigual . identificador
+
+    identificador  desplazar e ir al estado 96
+
+
+Estado 60
+
+   29 PCP2: Radd Rigual . NUMR
+
+    Rmenos  desplazar e ir al estado 83
+    numero  desplazar e ir al estado 84
+
+    NUMR  ir al estado 97
+
+
+Estado 61
+
+   20 PCP: PCP PCP2 .
+
+    $default  reduce usando la regla 20 (PCP)
+
+
+Estado 62
+
+   31 PM: Rpath Rigual . PATH Rname Rigual identificador
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 98
+
+
+Estado 63
+
+   32 PM: Rname Rigual . identificador Rpath Rigual PATH
+
+    identificador  desplazar e ir al estado 99
+
+
+Estado 64
+
+   33 DESMONTAR: Rumount Rid Rigual . identificador
+
+    identificador  desplazar e ir al estado 100
+
+
+Estado 65
+
+   38 PREP2: Rpath Rigual . PATH
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 101
+
+
+Estado 66
+
+   37 PREP2: Rname Rigual . NR
+
+    Rmbr   desplazar e ir al estado 102
+    Rdisk  desplazar e ir al estado 103
+
+    NR  ir al estado 104
+
+
+Estado 67
+
+   39 PREP2: Rid Rigual . identificador
+
+    identificador  desplazar e ir al estado 105
+
+
+Estado 68
+
+   35 PREP: PREP PREP2 .
+
+    $default  reduce usando la regla 35 (PREP)
+
+
+Estado 69
+
+   40 SCRIPT: Rexec Rpath Rigual . PATH
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 106
+
+
+Estado 70
+
+   14 PCD2: Rsize Rigual numero .
+
+    $default  reduce usando la regla 14 (PCD2)
+
+
+Estado 71
+
+   43 FIT: Rbf .
+
+    $default  reduce usando la regla 43 (FIT)
+
+
+Estado 72
+
+   44 FIT: Rff .
+
+    $default  reduce usando la regla 44 (FIT)
+
+
+Estado 73
+
+   45 FIT: Rwf .
+
+    $default  reduce usando la regla 45 (FIT)
+
+
+Estado 74
+
+   16 PCD2: Rfit Rigual FIT .
+
+    $default  reduce usando la regla 16 (PCD2)
+
+
+Estado 75
+
+   46 UNIT: Runitk .
+
+    $default  reduce usando la regla 46 (UNIT)
+
+
+Estado 76
+
+   47 UNIT: Runitm .
+
+    $default  reduce usando la regla 47 (UNIT)
+
+
+Estado 77
+
+   48 UNIT: Runitb .
+
+    $default  reduce usando la regla 48 (UNIT)
+
+
+Estado 78
+
+   17 PCD2: Runit Rigual UNIT .
+
+    $default  reduce usando la regla 17 (PCD2)
+
+
+Estado 79
+
+   42 PATH: rut .
+
+    $default  reduce usando la regla 42 (PATH)
+
+
+Estado 80
+
+   41 PATH: cadena .
+
+    $default  reduce usando la regla 41 (PATH)
+
+
+Estado 81
+
+   15 PCD2: Rpath Rigual PATH .
+
+    $default  reduce usando la regla 15 (PCD2)
+
+
+Estado 82
+
+   18 ELIMINARDISCO: Rrmdisk Rpath Rigual PATH .
+
+    $default  reduce usando la regla 18 (ELIMINARDISCO)
+
+
+Estado 83
+
+   57 NUMR: Rmenos . numero
+
+    numero  desplazar e ir al estado 107
+
+
+Estado 84
+
+   56 NUMR: numero .
+
+    $default  reduce usando la regla 56 (NUMR)
+
+
+Estado 85
+
+   22 PCP2: Rsize Rigual NUMR .
+
+    $default  reduce usando la regla 22 (PCP2)
+
+
+Estado 86
+
+   24 PCP2: Rfit Rigual FIT .
+
+    $default  reduce usando la regla 24 (PCP2)
+
+
+Estado 87
+
+   25 PCP2: Runit Rigual UNIT .
+
+    $default  reduce usando la regla 25 (PCP2)
+
+
+Estado 88
+
+   23 PCP2: Rpath Rigual PATH .
+
+    $default  reduce usando la regla 23 (PCP2)
+
+
+Estado 89
+
+   49 TYPE: Rtypep .
+
+    $default  reduce usando la regla 49 (TYPE)
+
+
+Estado 90
+
+   50 TYPE: Rtypee .
+
+    $default  reduce usando la regla 50 (TYPE)
+
+
+Estado 91
+
+   51 TYPE: Rtypel .
+
+    $default  reduce usando la regla 51 (TYPE)
+
+
+Estado 92
+
+   26 PCP2: Rtype Rigual TYPE .
+
+    $default  reduce usando la regla 26 (PCP2)
+
+
+Estado 93
+
+   52 DELETE: Rdeletefast .
+
+    $default  reduce usando la regla 52 (DELETE)
+
+
+Estado 94
+
+   53 DELETE: Rdeletefull .
+
+    $default  reduce usando la regla 53 (DELETE)
+
+
+Estado 95
+
+   27 PCP2: Rdelete Rigual DELETE .
+
+    $default  reduce usando la regla 27 (PCP2)
+
+
+Estado 96
+
+   28 PCP2: Rname Rigual identificador .
+
+    $default  reduce usando la regla 28 (PCP2)
+
+
+Estado 97
+
+   29 PCP2: Radd Rigual NUMR .
+
+    $default  reduce usando la regla 29 (PCP2)
+
+
+Estado 98
+
+   31 PM: Rpath Rigual PATH . Rname Rigual identificador
+
+    Rname  desplazar e ir al estado 108
+
+
+Estado 99
+
+   32 PM: Rname Rigual identificador . Rpath Rigual PATH
+
+    Rpath  desplazar e ir al estado 109
+
+
+Estado 100
+
+   33 DESMONTAR: Rumount Rid Rigual identificador .
+
+    $default  reduce usando la regla 33 (DESMONTAR)
+
+
+Estado 101
+
+   38 PREP2: Rpath Rigual PATH .
+
+    $default  reduce usando la regla 38 (PREP2)
+
+
+Estado 102
+
+   54 NR: Rmbr .
+
+    $default  reduce usando la regla 54 (NR)
+
+
+Estado 103
+
+   55 NR: Rdisk .
+
+    $default  reduce usando la regla 55 (NR)
+
+
+Estado 104
+
+   37 PREP2: Rname Rigual NR .
+
+    $default  reduce usando la regla 37 (PREP2)
+
+
+Estado 105
+
+   39 PREP2: Rid Rigual identificador .
+
+    $default  reduce usando la regla 39 (PREP2)
+
+
+Estado 106
+
+   40 SCRIPT: Rexec Rpath Rigual PATH .
+
+    $default  reduce usando la regla 40 (SCRIPT)
+
+
+Estado 107
+
+   57 NUMR: Rmenos numero .
+
+    $default  reduce usando la regla 57 (NUMR)
+
+
+Estado 108
+
+   31 PM: Rpath Rigual PATH Rname . Rigual identificador
+
+    Rigual  desplazar e ir al estado 110
+
+
+Estado 109
+
+   32 PM: Rname Rigual identificador Rpath . Rigual PATH
+
+    Rigual  desplazar e ir al estado 111
+
+
+Estado 110
+
+   31 PM: Rpath Rigual PATH Rname Rigual . identificador
+
+    identificador  desplazar e ir al estado 112
+
+
+Estado 111
+
+   32 PM: Rname Rigual identificador Rpath Rigual . PATH
+
+    rut     desplazar e ir al estado 79
+    cadena  desplazar e ir al estado 80
+
+    PATH  ir al estado 113
+
+
+Estado 112
+
+   31 PM: Rpath Rigual PATH Rname Rigual identificador .
+
+    $default  reduce usando la regla 31 (PM)
+
+
+Estado 113
+
+   32 PM: Rname Rigual identificador Rpath Rigual PATH .
+
+    $default  reduce usando la regla 32 (PM)

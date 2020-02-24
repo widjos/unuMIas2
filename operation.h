@@ -8,6 +8,7 @@
 #include <string.h>
 #include <algorithm>
 #include <ctime>
+#include <stdio.h>
 
 using namespace std;
 
@@ -19,25 +20,17 @@ public:
     struct dataValues {
 
         int   size;
+        int   add;
         char  unit[216];
         char  path[216];
         char  fit[216];
         char  type[216];
         char  name[216];
+        char  delet[216];
+
 
     } ;
 
-    struct baseDisk {
-      int       mbr_tamano;
-      int       mbr_disk_signature;
-      time_t    date;
-      char      disk_fit;
-      int       mbr_partition1;
-      int       mbr_partition2;
-      int       mbr_partition3;
-      int       mbr_partition4;
-
-    };
 
     struct partition{
       char part_status;
@@ -49,6 +42,17 @@ public:
 
     };
 
+    struct baseDisk {
+      int       mbr_tamano;
+      int       mbr_disk_signature;
+      time_t    date;
+      char      disk_fit;
+      struct partition   mbr_partition1;
+      struct partition   mbr_partition2;
+      struct partition    mbr_partition3;
+      struct partition    mbr_partition4;
+
+    };
 
     struct ExtDisk {
 
@@ -61,13 +65,20 @@ public:
     };
 
 
+
+
     static int K ;
     static void createDisk(struct  dataValues auxInput);
     static void cleanStr(char input[]);
     static void writeDiskFile( struct  dataValues auxInput);
     static void writeFile(int size, struct  dataValues auxInput);
+    static void removeDisk(char input[]);
+    static void administrerDisk(struct  dataValues auxInput);
     static string getDirs(char input[]);
     static void showMBR(char input[]);
+    static void writePartition(struct  dataValues auxInput, int option);
+    static void showReportDisk(char* path);
+    static void printPartitionRep(int direccion, char* dir);
 
 private:
 

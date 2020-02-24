@@ -34,8 +34,8 @@
 /* Undocumented macros, especially those whose name start with YY_,
    are private implementation details.  Do not rely on them.  */
 
-#ifndef YY_YY_PARSER_H_INCLUDED
-# define YY_YY_PARSER_H_INCLUDED
+#ifndef YY_YY_PARSERMIAP1_TAB_H_INCLUDED
+# define YY_YY_PARSERMIAP1_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -49,44 +49,41 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    Value_Int = 258,
-    Value_Double = 259,
-    Value_Char = 260,
-    Value_String = 261,
-    Id = 262,
-    Asign = 263,
-    exit_command = 264,
-    Mkdisk = 265,
-    Rmdisk = 266,
-    Fdisk = 267,
-    Mount = 268,
-    Unmount = 269,
-    Report = 270,
-    Execute = 271,
-    Size = 272,
-    Fit = 273,
-    Bf = 274,
-    Ff = 275,
-    Wf = 276,
-    Unit = 277,
-    Kbytes = 278,
-    Mbytes = 279,
-    Bytes = 280,
-    Path = 281,
-    Type = 282,
-    Primary = 283,
-    Extended = 284,
-    Logic = 285,
-    Delete = 286,
-    Fast = 287,
-    Full = 288,
-    Name = 289,
-    Add = 290,
-    Mbr = 291,
-    Ebr = 292,
-    Disc = 293,
-    Identify = 294,
-    Url = 295
+    Rmkdisk = 258,
+    Rsize = 259,
+    Rfit = 260,
+    Rbf = 261,
+    Rff = 262,
+    Rwf = 263,
+    Runit = 264,
+    Runitk = 265,
+    Runitm = 266,
+    Runitb = 267,
+    Rpath = 268,
+    Rigual = 269,
+    Rrmdisk = 270,
+    Rfdisk = 271,
+    Rtype = 272,
+    Rdelete = 273,
+    Rtypep = 274,
+    Rtypee = 275,
+    Rtypel = 276,
+    Rdeletefast = 277,
+    Rdeletefull = 278,
+    Rname = 279,
+    Radd = 280,
+    Rmount = 281,
+    Rumount = 282,
+    Rmenos = 283,
+    Rid = 284,
+    Rrep = 285,
+    Rexec = 286,
+    Rmbr = 287,
+    Rdisk = 288,
+    rut = 289,
+    identificador = 290,
+    numero = 291,
+    cadena = 292
   };
 #endif
 
@@ -95,14 +92,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 22 "Syntact.y" /* yacc.c:1921  */
+#line 51 "parserMIAp1.y" /* yacc.c:1921  */
 
 //se especifican los tipo de valores para los no terminales y lo terminales
 char TEXT [256];
-char TEXT2 [256];
-//class NodoAST *nodito;
 
-#line 106 "parser.h" /* yacc.c:1921  */
+#line 101 "parserMIAp1.tab.h" /* yacc.c:1921  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -110,23 +105,9 @@ typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
-/* Location type.  */
-#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
-typedef struct YYLTYPE YYLTYPE;
-struct YYLTYPE
-{
-  int first_line;
-  int first_column;
-  int last_line;
-  int last_column;
-};
-# define YYLTYPE_IS_DECLARED 1
-# define YYLTYPE_IS_TRIVIAL 1
-#endif
-
 
 extern YYSTYPE yylval;
-extern YYLTYPE yylloc;
+
 int yyparse (void);
 
-#endif /* !YY_YY_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_PARSERMIAP1_TAB_H_INCLUDED  */

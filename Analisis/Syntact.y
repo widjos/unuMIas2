@@ -40,6 +40,7 @@ char TEXT2 [256];
 %token<TEXT> Value_String;
 %token<TEXT> Id;
 
+%token<TEXT>   Asign;
 %token<TEXT>   exit_command;
 %token<TEXT>   Mkdisk;
 %token<TEXT>   Rmdisk;
@@ -62,9 +63,9 @@ char TEXT2 [256];
 %token<TEXT>   Path;
 %token<TEXT>   Type;
 %token<TEXT>   Primary;
-%token<TEXT>   Extended;
-             
+%token<TEXT>   Extended;            
 %token<TEXT>   Logic;
+
 %token<TEXT>   Delete;
 %token<TEXT>   Fast;
 %token<TEXT>   Full;
@@ -86,8 +87,8 @@ char TEXT2 [256];
 %type<TEXT> S      Line ;
 %type<TEXT> MK     RM       F       M  UM  REP  EXE ;
 %type<TEXT> MAKE   FIT
-%type<TEXT> UBYTE  FOPTION  STR_VAL REP_TYPE   P_OPTION  ;
-%type<TEXT> DTYPE  TPARTITION ;
+%type<TEXT> UBYTE  FOPTION  STR_VAL REP_TYPE   P_OPTION  DTYPE  TPARTITION ;
+
 
 
 %start S
@@ -100,14 +101,14 @@ S:   S Line                                                                     
   ;
 
 
-Line:   Mkdisk  MK                                                                 { Operation::createDisk(aux);  aux = {};   }
-     |  Rmdisk  RM                                                                 { printf("Removed disk  ");      }
-     |  Fdisk   F                                                                  { printf("administer disk command ");  }
+Line:   Mkdisk  MK                                                                 { Operation::createDisk(aux);        aux = {};      }
+     |  Rmdisk  RM                                                                 { Operation::removeDisk(aux.path);   aux = {};      }
+     |  Fdisk   F                                                                  { Operation::administrerDisk(aux);   aux = {};      }
      |  Mount   M                                                                  { printf("mount   disk command ");     }
      |  Unmount UM                                                                 { printf("unmount disk command ");     }
      |  Report  REP                                                                { printf("report  disk command ");     }
-     |  Execute RM                                                                 { printf("execute disk command ");     }                    
-     |  exit_command                                                               { printf("Saliendo del gestor de discos \n");   exit(EXIT_SUCCESS);                  }
+     |  Execute EXE                                                                { printf("execute disk command ");     }                    
+     |  exit_command                                                               { printf("Saliendo del gestor de discos \n");   exit(EXIT_SUCCESS);   }
 
 ;
 
@@ -117,13 +118,13 @@ MK: MK MAKE                                                                     
 ;
 
 
-MAKE: Size '=' Value_Int                                     { aux.size = atoi($3) ;   }
-    | Path '=' P_OPTION                                      { strcpy(aux.path ,$3);  }
-    | Unit '=' UBYTE                                         { strcpy(aux.unit ,$3);  }
-    | Fit  '=' FOPTION                                       { strcpy(aux.fit ,$3);  }
+MAKE: Size Asign Value_Int                                     { aux.size = atoi($3) ;    }
+    | Path Asign P_OPTION                                      { strcpy(aux.path ,$3);    }
+    | Unit Asign UBYTE                                         { strcpy(aux.unit ,$3);    } 
+    | Fit  Asign FOPTION                                       { strcpy(aux.fit ,$3);     }
 ;
 
-RM: Path '=' P_OPTION                                           {printf(" Path ");}
+RM: Path Asign P_OPTION                                        {strcpy(aux.path ,$3);     }
 ;
 
 F: F FIT                                                        {;}        
@@ -131,38 +132,35 @@ F: F FIT                                                        {;}
   
 ;
 
-FIT:    Size    '=' Value_Int                                                     {;}  
-   |    Unit    '=' UBYTE                                                         {;}
-   |    Path    '=' P_OPTION                                                      {;}
-   |    Type    '=' TPARTITION                                                    {;}
-   |    Fit     '=' FOPTION                                                       {;}
-   |    Delete  '=' DTYPE                                                         {;}  
-   |    Name    '=' Id                                                            {;}
-   |    Add     '=' Value_Int                                                     {;}      
+FIT:    Size    Asign Value_Int                                     {  aux.size = atoi($3) ; }                
+   |    Unit    Asign UBYTE                                         {  strcpy(aux.unit ,$3); }                
+   |    Path    Asign P_OPTION                                      {  strcpy(aux.path ,$3); }                
+   |    Type    Asign TPARTITION                                    {  strcpy(aux.type ,$3); }                
+   |    Fit     Asign FOPTION                                       {  strcpy(aux.fit ,$3); }                                          
+   |    Delete  Asign DTYPE                                         {  strcpy(aux.delet ,$3); }                    
+   |    Name    Asign STR_VAL                                       {  strcpy(aux.name ,$3);  }               
+   |    Add     Asign Value_Int                                     {  aux.add = atoi($3) ;   }                     
 ;
 
 
 
-M:  Path '=' P_OPTION    Name '=' Id                                             { printf(" Path and Name ");} 
-   | Name '=' Id         Path '=' P_OPTION                                       { printf(" Name and Path ");}
-   | error
+M:  Path Asign P_OPTION    Name Asign Id                                             { printf(" Path and Name ");} 
+   | Name Asign Id         Path Asign P_OPTION                                       { printf(" Name and Path ");}
+   | error                                                                       {}              
 ;
 
-UM: Identify '=' Id                                                                { printf(" Identify ");     }
-    | error 
+UM: Identify Asign Id                                                                { printf(" Identify ");     }
+| error                                                                            {}
 ;
 
-REP: Identify   '=' Id  Path '=' P_OPTION  Name '=' REP_TYPE                       { printf(" Name , Path , Id ");     } 
-    | error       
-;
-
-
-EXE: Path    '=' P_OPTION                                                          { printf(" Path ");  }
-    | error
+REP: Identify   Asign Id  Path Asign P_OPTION  Name Asign REP_TYPE                       { printf(" Name , Path , Id ");     } 
+    | error                                                                        {}        
 ;
 
 
-
+EXE: Path    Asign P_OPTION                                                          { printf(" Path ");  }
+    | error                                                                        {}
+;
 
 
 STR_VAL: Value_String                                                               {Operation::cleanStr($1);    strcpy($$,$1);}
@@ -171,10 +169,10 @@ STR_VAL: Value_String                                                           
         
 ;
 
-UBYTE: Kbytes                                                                 {strcpy($$,$1);}
-      | Mbytes                                                                {strcpy($$,$1);  }
-      | Bytes                                                                 {strcpy($$,$1);}
-    |  error                                                                       
+UBYTE: Kbytes                                                                        {strcpy($$,$1);  }
+      | Mbytes                                                                       {strcpy($$,$1);  }
+      | Bytes                                                                        {strcpy($$,$1);  }
+      |  error                                                                       { }                                                                      
 ;
 
 FOPTION:  Bf                                                                         {strcpy($$,$1);}
@@ -194,17 +192,16 @@ P_OPTION: Value_String                                                        { 
          | Url                                                                {  strcpy($$,$1);}
  ; 
 
-DTYPE: Fast                                                                   {}
-      | Full                                                                  {}
 
- ;
 
-TPARTITION: Primary                                                           {}
-          | Extended                                                          {}  
-          | Logic                                                             {}
+TPARTITION: Primary                                                           {  }
+          | Extended                                                          {  }  
+          | Logic                                                             {  }
 ;
 
-
+DTYPE: Fast                                                                  { strcpy($$,$1);    }
+      | Full                                                                 { strcpy($$,$1);    }
+;
 
 %%
 

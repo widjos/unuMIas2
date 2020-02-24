@@ -6,6 +6,7 @@ CONFIG -= qt
 SOURCES += \
         Analisis/parser.cpp \
         Analisis/scanner.cpp \
+        linkedlist.cpp \
         main.cpp \
         operation.cpp
 
@@ -16,4 +17,5 @@ HEADERS += \
     Analisis/parser.h \
     Analisis/scanner.h \
     Analisis/scanner.h \
+    linkedlist.h \
     operation.h
